@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doyok Surf | Selong Belanak</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for clean typography + Handwriting font for signature -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Markdown Parser for AI responses -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        hand: ['Nothing You Could Do', 'cursive'],
+                    },
+                    colors: {
+                        ocean: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        seafoam: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            glow: 'rgba(52, 211, 153, 0.5)',
+                        },
+                        forest: {
+                            800: '#064e3b',
+                            900: '#022c22',
+                        },
+                        sand: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'sparkle': 'sparkle 2s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        sparkle: {
+                            '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                            '50%': { opacity: 0.5, transform: 'scale(1.1)' },
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0, 0, 0, 0.1)',
+                        'glow-green': '0 0 20px rgba(16, 185, 129, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .glass-dark {
+            background: rgba(2, 44, 34, 0.7); /* Forest Green Tint */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax Utilities */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* 3D Tilt Card Effect */
+        .tilt-card {
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Button Bloom Effect */
+        .btn-bloom {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-bloom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        .btn-bloom:hover::after {
+            width: 300%;
+            height: 300%;
+        }
+        .btn-bloom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4); /* Green Glow */
+        }
+
+        /* Radial Gradient Spots for Atmosphere */
+        .light-spot {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* AI Response Styling */
+        .ai-response h3 { font-weight: 700; font-size: 1.25rem; margin-top: 1rem; margin-bottom: 0.5rem; color: #064e3b; }
+        .ai-response ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .ai-response li { margin-bottom: 0.25rem; color: #334155; }
+        .ai-response p { margin-bottom: 1rem; color: #334155; }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #10b981; /* Green loader */
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-800 bg-sand-50 selection:bg-seafoam-400 selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 top-0 py-6 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight text-white mix-blend-difference z-50 flex items-center gap-2">
+                <i class="ph-fill ph-wave-sine text-seafoam-400"></i>
+                <span>Doyok<span class="font-light opacity-80">Surf.</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-sm font-medium text-white/90 hover:text-seafoam-400 transition mix-blend-exclusion relative group">
+                    About
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-seafoam-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#experience" class="text-sm font-medium text-white/90 hover:text-seafoam-400 transition mix-blend-exclusion relative group">
+                    Experience
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-seafoam-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#rates" class="text-sm font-medium text-white/90 hover:text-seafoam-400 transition mix-blend-exclusion relative group">
+                    Rates
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-seafoam-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20Doyok!%20I%20would%20like%20to%20book%20a%20lesson." target="_blank" class="btn-bloom glass px-6 py-2.5 rounded-full text-sm font-bold text-slate-900 hover:bg-white transition shadow-glow-green flex items-center gap-2">
+                    <i class="ph-fill ph-whatsapp text-green-600 text-lg"></i> Book Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden z-50 text-white mix-blend-difference focus:outline-none">
+                <i class="ph ph-list text-3xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-forest-900/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center space-y-8 opacity-0 pointer-events-none transition-opacity duration-300">
+            <a href="#about" class="mobile-link text-3xl font-light text-white hover:text-seafoam-400 transition">About</a>
+            <a href="#experience" class="mobile-link text-3xl font-light text-white hover:text-seafoam-400 transition">Experience</a>
+            <a href="#rates" class="mobile-link text-3xl font-light text-white hover:text-seafoam-400 transition">Rates</a>
+            <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20Doyok!%20I%20would%20like%20to%20book%20a%20lesson." target="_blank" class="text-xl font-bold text-seafoam-400 flex items-center gap-2">
+                <i class="ph-fill ph-whatsapp"></i> Book via WhatsApp
+            </a>
+            <button id="close-menu" class="absolute top-6 right-6 text-white/50 hover:text-white">
+                <i class="ph ph-x text-3xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Ocean Parallax) -->
+    <header class="relative h-screen w-full overflow-hidden">
+        <!-- Parallax Background -->
+        <div class="absolute inset-0 parallax-bg brightness-[0.8]" 
+             style="background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=2070&auto=format&fit=crop');">
+        </div>
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-forest-900/40"></div>
+
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-5xl mx-auto pt-20">
+            <div class="mb-6 animate-fade-in-up flex items-center gap-3 text-seafoam-400 font-medium tracking-[0.2em] uppercase text-sm bg-black/20 backdrop-blur-sm px-4 py-1 rounded-full border border-white/10">
+                <i class="ph-fill ph-map-pin"></i> Selong Belanak, Indonesia
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-white tracking-tighter mb-2 animate-fade-in-up leading-none" style="animation-delay: 0.2s;">
+                Ride the <br /> Perfect Wave.
+            </h1>
+            
+            <!-- Signature Swirl -->
+            <div class="w-32 md:w-48 h-4 mb-8 animate-fade-in-up opacity-80" style="animation-delay: 0.4s;">
+                <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 10C30 20 60 0 90 10C120 20 150 0 198 10" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <p class="text-lg md:text-xl text-white/90 font-light max-w-2xl mb-10 animate-fade-in-up leading-relaxed" style="animation-delay: 0.5s;">
+                Professional coaching in paradise. Join Doyok for beginner friendly lessons and advanced guiding in the crystal waters of Lombok.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-5 animate-fade-in-up w-full md:w-auto" style="animation-delay: 0.7s;">
+                <a href="#rates" class="btn-bloom px-8 py-4 bg-white text-forest-900 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl">
+                    View Rates
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20Doyok!%20I%20have%20a%20question%20about%20surfing." class="btn-bloom px-8 py-4 glass-dark text-white rounded-full font-bold text-lg shadow-xl flex items-center justify-center gap-2 border border-seafoam-400/30">
+                    <i class="ph-fill ph-whatsapp text-seafoam-400 text-xl"></i> WhatsApp Doyok
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float opacity-80 cursor-pointer hover:text-seafoam-400 transition">
+            <i class="ph-bold ph-arrow-down text-white text-3xl drop-shadow-lg"></i>
+        </div>
+    </header>
+
+    <!-- About Section (Forest Theme Transition) -->
+    <section id="about" class="py-32 px-6 relative overflow-hidden bg-sand-50">
+        <!-- Parallax Forest Background Strip -->
+        <div class="absolute top-0 left-0 w-full h-64 bg-forest-900 z-0"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-soft border border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-16 items-center overflow-hidden">
+                
+                <!-- Image Side -->
+                <div class="reveal relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-seafoam-400 to-blue-500 rounded-[2.5rem] opacity-20 blur-lg group-hover:opacity-40 transition duration-700"></div>
+                    <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl">
+                        <img 
+                            src="https://images.unsplash.com/photo-1528154291023-a6525fdd7b40?q=80&w=2070&auto=format&fit=crop" 
+                            alt="Doyok Surf Instructor Smiling" 
+                            class="w-full h-full object-cover hover:scale-110 transition duration-1000 ease-in-out"
+                        >
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <p class="text-white font-bold text-xl">Doyok</p>
+                            <div class="flex items-center gap-2 text-seafoam-400 text-sm font-medium uppercase tracking-wider">
+                                <i class="ph-fill ph-seal-check"></i> Certified Instructor
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Text Side -->
+                <div class="reveal text-slate-800 relative">
+                    <!-- Decorative Light Spot -->
+                    <div class="light-spot -top-20 -right-20"></div>
+                    
+                    <div class="flex items-center gap-2 text-forest-800 font-bold uppercase tracking-widest text-xs mb-4">
+                        <i class="ph-fill ph-wave-triangle"></i> Local Legend
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-8 leading-tight text-forest-900">
+                        More than just <br> a lesson.
+                    </h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        With over a decade of experience in the waters of Selong Belanak, Doyok isn't just an instructor; he's your connection to the ocean. 
+                    </p>
+                    <p class="text-lg text-slate-600 mb-10 leading-relaxed">
+                        Whether you are standing up for the first time or perfecting your cutback, Doyok creates a safe, fun, and incredibly educational environment. Fluent in English and rich in local knowledge.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-100">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-4xl font-bold text-forest-800">10+</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Years Experience</span>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <span class="text-4xl font-bold text-forest-800">100%</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Stoke Level</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Slider (Jungle Background) -->
+    <section id="experience" class="py-32 relative text-white parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1515444744559-7be63e1600de?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-forest-900/80 backdrop-blur-sm"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end reveal">
+            <div>
+                <div class="flex items-center gap-2 text-seafoam-400 font-bold uppercase tracking-widest text-xs mb-3">
+                    <i class="ph-fill ph-sparkle"></i> Why Choose Us
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold drop-shadow-lg">The Experience</h2>
+            </div>
+            <p class="text-white/70 mt-4 md:mt-0 max-w-md text-right hidden md:block">
+                Selong Belanak provides the perfect canvas for your surfing journey. Soft sand, gentle rollers, and green hills.
+            </p>
+        </div>
+
+        <div class="relative z-10 flex gap-8 overflow-x-auto pb-16 px-6 no-scrollbar snap-x items-start">
+            
+            <!-- Card 1 (Tilt Effect) -->
+            <div class="tilt-card min-w-[320px] md:min-w-[420px] snap-center reveal group cursor-pointer">
+                <div class="relative h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1415604934674-561df9abf539?q=80&w=2080&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Beginner">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest-900 via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-10 left-10 right-10">
+                        <div class="w-12 h-12 rounded-full bg-seafoam-400 flex items-center justify-center mb-4 text-forest-900 shadow-glow-green">
+                            <i class="ph-fill ph-smiley text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-2">Beginner Friendly</h3>
+                        <p class="text-white/80 leading-relaxed text-sm">Soft sand bottom and perfect white water make learning safe and incredibly fun.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="tilt-card min-w-[320px] md:min-w-[420px] snap-center reveal group cursor-pointer" style="transition-delay: 0.1s">
+                <div class="relative h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=1262&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Crystal Clear">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest-900 via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-10 left-10 right-10">
+                         <div class="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center mb-4 text-white shadow-lg">
+                            <i class="ph-fill ph-drop text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-2">Crystal Clear</h3>
+                        <p class="text-white/80 leading-relaxed text-sm">Experience the beauty of Lombok with water so clear you can see the sandy bottom.</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 3 -->
+             <div class="tilt-card min-w-[320px] md:min-w-[420px] snap-center reveal group cursor-pointer" style="transition-delay: 0.2s">
+                <div class="relative h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Advanced">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest-900 via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-10 left-10 right-10">
+                         <div class="w-12 h-12 rounded-full bg-orange-400 flex items-center justify-center mb-4 text-white shadow-lg">
+                            <i class="ph-fill ph-video-camera text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-2">Technical Coaching</h3>
+                        <p class="text-white/80 leading-relaxed text-sm">Advanced wave analysis and video review to take your style to the next level.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rates Section (Sunset Theme) -->
+    <section id="rates" class="pt-32 pb-20 px-6 relative bg-sand-50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <div class="inline-flex items-center gap-2 text-forest-800 font-bold uppercase tracking-widest text-xs mb-4 bg-white px-4 py-2 rounded-full shadow-sm">
+                    <i class="ph-fill ph-tag"></i> Investment
+                </div>
+                <h2 class="text-5xl font-bold tracking-tight text-slate-900">Simple Pricing.</h2>
+                <p class="text-lg text-slate-500 mt-4">Professional instruction. Unforgettable memories.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                <!-- Tier 1 -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-soft border border-slate-100 hover:shadow-2xl transition duration-500 reveal hover:-translate-y-2 flex flex-col group">
+                    <div class="mb-6 flex justify-between items-start">
+                        <span class="bg-seafoam-100 text-forest-800 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest">Most Popular</span>
+                        <i class="ph-duotone ph-user text-3xl text-seafoam-400 group-hover:scale-110 transition"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">Private Lesson</h3>
+                    <div class="mt-6 mb-8 pb-8 border-b border-slate-100">
+                        <span class="text-5xl font-bold text-slate-900 tracking-tight">300K</span>
+                        <span class="text-slate-500 font-medium">IDR</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-seafoam-500 mr-3 text-xl"></i> 2 Hours Water Time
+                        </li>
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-seafoam-500 mr-3 text-xl"></i> 1-on-1 Focus
+                        </li>
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-seafoam-500 mr-3 text-xl"></i> Board & Rash Guard
+                        </li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20I%20am%20looking%20to%20book%20a%20private%20lesson-" class="btn-bloom w-full block text-center bg-forest-900 text-white py-4 rounded-xl font-bold hover:bg-forest-800 transition shadow-lg">Book Private</a>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-soft border border-slate-100 hover:shadow-2xl transition duration-500 reveal hover:-translate-y-2 flex flex-col group" style="transition-delay: 0.1s;">
+                    <div class="mb-6 flex justify-between items-start">
+                        <div class="h-6"></div>
+                        <i class="ph-duotone ph-users text-3xl text-blue-400 group-hover:scale-110 transition"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">Couple / Duo</h3>
+                    <div class="mt-6 mb-8 pb-8 border-b border-slate-100">
+                        <span class="text-5xl font-bold text-slate-900 tracking-tight">500K</span>
+                        <span class="text-slate-500 font-medium">IDR</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-blue-400 mr-3 text-xl"></i> Price for 2 People
+                        </li>
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-blue-400 mr-3 text-xl"></i> Semi-Private
+                        </li>
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-blue-400 mr-3 text-xl"></i> 2 Boards Included
+                        </li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20I%20am%20looking%20to%20book%20a%20couple%20lesson-" class="btn-bloom w-full block text-center bg-slate-100 text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-200 transition">Book Duo</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-soft border border-slate-100 hover:shadow-2xl transition duration-500 reveal hover:-translate-y-2 flex flex-col group" style="transition-delay: 0.2s;">
+                     <div class="mb-6 flex justify-between items-start">
+                        <div class="h-6"></div>
+                        <i class="ph-duotone ph-compass text-3xl text-orange-400 group-hover:scale-110 transition"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">Advanced Guide</h3>
+                    <div class="mt-6 mb-8 pb-8 border-b border-slate-100">
+                        <span class="text-4xl font-bold text-slate-900 tracking-tight">Custom</span>
+                        <span class="text-slate-500 font-medium">Rates</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-orange-400 mr-3 text-xl"></i> Trip to Outside Breaks
+                        </li>
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-orange-400 mr-3 text-xl"></i> Wave Selection
+                        </li>
+                        <li class="flex items-center text-slate-600 text-sm font-medium">
+                            <i class="ph-fill ph-check-circle text-orange-400 mr-3 text-xl"></i> Video Analysis
+                        </li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20I%20am%20interested%20in%20advanced%20guiding-" class="btn-bloom w-full block text-center bg-slate-100 text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-200 transition">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI PLANNER SECTION (Green Gradient) -->
+    <section id="planner" class="py-24 px-6 bg-sand-50 relative z-10 overflow-hidden">
+        <div class="max-w-5xl mx-auto bg-gradient-to-br from-forest-900 to-forest-800 rounded-[3rem] p-8 md:p-16 text-center shadow-2xl relative reveal overflow-hidden">
+            
+            <!-- Background decoration -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-seafoam-500 rounded-full blur-3xl opacity-20"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+
+            <div class="relative z-10">
+                <div class="flex justify-center mb-6">
+                    <span class="bg-white/10 text-seafoam-400 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md border border-white/20 shadow-lg flex items-center gap-2">
+                        <i class="ph-fill ph-magic-wand"></i> Powered by AI
+                    </span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Plan Your Perfect Trip</h2>
+                <p class="text-white/70 text-lg mb-12 max-w-2xl mx-auto">Not sure how many lessons to book? Let our AI helper create a custom itinerary for your stay in Selong Belanak.</p>
+                
+                <!-- Planner Form -->
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-12 max-w-3xl mx-auto">
+                    <div class="w-full">
+                        <label for="surf-level" class="block text-left text-xs font-bold uppercase tracking-wider text-seafoam-400 mb-3 ml-4">Your Level</label>
+                        <div class="relative group">
+                            <select id="surf-level" class="w-full appearance-none bg-white/5 border border-white/10 text-white py-5 px-8 pr-12 rounded-2xl focus:outline-none focus:ring-2 focus:ring-seafoam-400 cursor-pointer font-medium transition group-hover:bg-white/10">
+                                <option value="Complete Beginner" class="text-slate-900">Complete Beginner</option>
+                                <option value="Intermediate" class="text-slate-900">Intermediate</option>
+                                <option value="Advanced" class="text-slate-900">Advanced</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-white/50">
+                                <i class="ph-bold ph-caret-down text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full">
+                        <label for="trip-days" class="block text-left text-xs font-bold uppercase tracking-wider text-seafoam-400 mb-3 ml-4">Days in Lombok</label>
+                        <div class="relative group">
+                            <select id="trip-days" class="w-full appearance-none bg-white/5 border border-white/10 text-white py-5 px-8 pr-12 rounded-2xl focus:outline-none focus:ring-2 focus:ring-seafoam-400 cursor-pointer font-medium transition group-hover:bg-white/10">
+                                <option value="3" class="text-slate-900">3 Days</option>
+                                <option value="5" class="text-slate-900">5 Days</option>
+                                <option value="7" class="text-slate-900">7 Days</option>
+                                <option value="10" class="text-slate-900">10 Days</option>
+                            </select>
+                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-white/50">
+                                <i class="ph-bold ph-caret-down text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="generatePlan()" id="generate-btn" class="btn-bloom w-full md:w-auto px-12 py-5 bg-seafoam-400 text-forest-900 rounded-2xl font-bold text-lg hover:bg-seafoam-500 transition shadow-glow-green flex items-center justify-center gap-3 mx-auto">
+                    <span>Generate Surf Plan</span>
+                    <i class="ph-fill ph-sparkle animate-sparkle"></i>
+                    <div id="btn-loader" class="loader hidden border-forest-900 border-t-transparent"></div>
+                </button>
+
+                <!-- Result Container -->
+                <div id="plan-result-container" class="hidden mt-16 text-left bg-white rounded-[2rem] p-10 shadow-2xl animate-fade-in-up relative">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-seafoam-400 to-blue-500"></div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4 flex items-center gap-3">
+                        <i class="ph-duotone ph-calendar-check text-seafoam-500 text-3xl"></i> Your Custom Itinerary
+                    </h3>
+                    <div id="plan-content" class="ai-response text-slate-600 leading-relaxed space-y-4">
+                        <!-- Content injected by JS -->
+                    </div>
+                    <div class="mt-10 pt-8 border-t border-slate-100 text-center">
+                        <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20Doyok!%20I%20just%20generated%20a%20plan%20and%20I%20want%20to%20book%20it!" target="_blank" class="inline-flex items-center gap-2 text-forest-900 hover:text-seafoam-500 font-bold transition group">
+                            Send this plan to Doyok <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Sunset Theme) -->
+    <footer class="bg-slate-900 text-white pt-32 pb-12 px-6 rounded-t-[4rem] relative z-0 mt-[-4rem] overflow-hidden">
+        <!-- Sunset Gradient Background -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=2070')] bg-cover bg-center opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-transparent"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-20">
+            <i class="ph-fill ph-wave-sine text-7xl text-seafoam-400 mb-8 inline-block animate-pulse-slow drop-shadow-glow-green"></i>
+            <h2 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 drop-shadow-lg">Ready to paddle out?</h2>
+            <p class="text-slate-300 text-xl mb-16 max-w-2xl mx-auto leading-relaxed">No deposit required. Just message Doyok to check the tide and book your slot.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-24">
+                <a href="https://api.whatsapp.com/send?phone=6287767087587&text=Hey%20Doyok!%20I%20want%20to%20check%20the%20tide%20and%20book%20a%20slot." class="btn-bloom px-10 py-5 bg-[#25D366] text-white rounded-full font-bold text-lg shadow-xl flex items-center gap-3 group">
+                    <i class="ph-fill ph-whatsapp text-2xl group-hover:rotate-12 transition"></i>
+                    <span>Chat on WhatsApp</span>
+                </a>
+                <a href="https://instagram.com/doyok_yo" target="_blank" class="px-10 py-5 glass-dark border border-white/10 rounded-full font-bold text-lg hover:bg-white/10 transition flex items-center gap-3 group">
+                    <i class="ph-fill ph-instagram text-2xl text-pink-400 group-hover:scale-110 transition"></i>
+                    <span>Instagram</span>
+                </a>
+            </div>
+
+            <div class="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-8 text-slate-400 text-sm font-medium tracking-wide">
+                <p>&copy; 2024 Doyok Surf School. Selong Belanak, Lombok.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-seafoam-400 transition">Location</a>
+                    <a href="#" class="hover:text-seafoam-400 transition">Safety</a>
+                    <a href="https://api.whatsapp.com/send?phone=6287767087587" class="hover:text-seafoam-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- 3D Tilt Effect for Cards ---
+        const cards = document.querySelectorAll('.tilt-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+
+        // --- Gemini API Logic ---
+        const apiKey = ""; // Provided by environment
+
+        async function generatePlan() {
+            const level = document.getElementById('surf-level').value;
+            const days = document.getElementById('trip-days').value;
+            const btn = document.getElementById('generate-btn');
+            const loader = document.getElementById('btn-loader');
+            const resultContainer = document.getElementById('plan-result-container');
+            const contentArea = document.getElementById('plan-content');
+
+            // UI Loading State
+            btn.disabled = true;
+            btn.classList.add('opacity-90', 'cursor-not-allowed');
+            loader.classList.remove('hidden');
+            loader.classList.remove('border-t-transparent'); // Fix loader visibility
+            loader.classList.add('border-white');
+            resultContainer.classList.add('hidden');
+
+            const systemPrompt = `You are Doyok, a friendly and fun local surf instructor in Selong Belanak, Lombok. 
+            Create a ${days}-day surf itinerary for a ${level} surfer. 
+            Focus on:
+            1. Surfing lessons with Doyok (recommend specific times of day generally, e.g., morning for calm winds).
+            2. Relaxing on the beautiful white sand beach.
+            3. Enjoying local coconuts and food (Nasi Goreng).
+            
+            Format the response in Markdown. Use bullet points for daily activities. Keep the tone super stoked, encouraging, and welcoming. Use emojis like 🌊, 🏄‍♂️, 🌴. 
+            Keep it brief but exciting. Do not mention specific prices, just the activities.`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: systemPrompt }] }] })
+                });
+
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0].content) {
+                    const markdownText = data.candidates[0].content.parts[0].text;
+                    contentArea.innerHTML = marked.parse(markdownText);
+                    resultContainer.classList.remove('hidden');
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    throw new Error("No content received");
+                }
+
+            } catch (error) {
+                console.error('Error generating plan:', error);
+                alert('Oops! The waves are a bit choppy (API Error). Please try again later!');
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-90', 'cursor-not-allowed');
+                loader.classList.add('hidden');
+            }
+        }
+
+        // --- Navbar Glass Effect ---
+        const navbar = document.getElementById('navbar');
+        const logoText = navbar.querySelector('a span');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass', 'shadow-sm');
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-3');
+                
+                // Text color handling for glass mode
+                const logo = navbar.querySelector('a');
+                logo.classList.remove('text-white', 'mix-blend-difference');
+                logo.classList.add('text-forest-900');
+                
+                const links = navbar.querySelectorAll('.hidden a');
+                links.forEach(link => {
+                    link.classList.remove('text-white/90', 'mix-blend-exclusion');
+                    link.classList.add('text-slate-600');
+                });
+                
+                const btn = document.getElementById('mobile-menu-btn');
+                btn.classList.remove('text-white', 'mix-blend-difference');
+                btn.classList.add('text-forest-900');
+
+            } else {
+                navbar.classList.remove('glass', 'shadow-sm', 'py-3');
+                navbar.classList.add('py-6');
+                
+                const logo = navbar.querySelector('a');
+                logo.classList.add('text-white', 'mix-blend-difference');
+                logo.classList.remove('text-forest-900');
+
+                const links = navbar.querySelectorAll('.hidden a');
+                links.forEach(link => {
+                    link.classList.add('text-white/90', 'mix-blend-exclusion');
+                    link.classList.remove('text-slate-600');
+                });
+
+                const btn = document.getElementById('mobile-menu-btn');
+                btn.classList.add('text-white', 'mix-blend-difference');
+                btn.classList.remove('text-forest-900');
+            }
+        });
+
+        // --- Scroll Reveal Observer ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // --- Mobile Menu ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('opacity-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    </script>
+</body>
+</html>
