@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en" class="scroll-smooth"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Doyok Surf | Selong Belanak&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Tailwind CSS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Google Fonts: Inter for that clean, Apple-like typography --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Phosphor Icons --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@phosphor-icons/web"&gt;&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Markdown Parser for AI responses --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tailwind.config = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>theme: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>extend: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>fontFamily: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>sans: ['Inter', 'sans-serif'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>colors: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>ocean: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>50: '#f0f9ff',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>100: '#e0f2fe',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>500: '#0ea5e9',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>800: '#075985',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>900: '#0c4a6e',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>sand: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>50: '#fafaf9',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>100: '#f5f5f4',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>animation: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'fade-in-up': 'fadeInUp 1s ease-out forwards',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'float': 'float 6s ease-in-out infinite',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>keyframes: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fadeInUp: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'0%': { opacity: '0', transform: 'translateY(20px)' },</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'100%': { opacity: '1', transform: 'translateY(0)' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>float: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'0%, 100%': { transform: 'translateY(0)' },</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'50%': { transform: 'translateY(-10px)' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Custom Glassmorphism Utilities */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glass {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.7);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(255, 255, 255, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glass-dark {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(15, 23, 42, 0.6);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(255, 255, 255, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Smooth reveal on scroll classes */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(30px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.8s ease-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Hide scrollbar for horizontal scroll areas */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.no-scrollbar::-webkit-scrollbar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.no-scrollbar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-ms-overflow-style: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>scrollbar-width: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Background styles for different sections */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bg-forest {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-image: url('https://images.unsplash.com/photo-1542282287-f6db49890432?q=80&amp;w=2070&amp;auto=format&amp;fit=crop'); /* Placeholder forest image */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-size: cover;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-position: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-attachment: fixed; /* Optional: for parallax scroll effect */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bg-sunset {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&amp;w=2070&amp;auto=format&amp;fit=crop'); /* Placeholder sunset image */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-size: cover;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-position: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-attachment: fixed; /* Optional: for parallax scroll effect */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* AI Response Styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.ai-response h3 { font-weight: 700; font-size: 1.25rem; margin-top: 1rem; margin-bottom: 0.5rem; color: #0f172a; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.ai-response ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.ai-response li { margin-bottom: 0.25rem; color: #334155; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.ai-response p { margin-bottom: 1rem; color: #334155; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loader {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid #f3f3f3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 3px solid #0ea5e9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-animation: spin 1s linear infinite; /* Safari */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 1s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: rotate(0deg); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: rotate(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="font-sans antialiased text-slate-800 bg-sand-50 selection:bg-ocean-500 selection:text-white overflow-x-hidden"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Navigation --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;nav id="navbar" class="fixed w-full z-50 transition-all duration-300 top-0 py-4 px-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-6xl mx-auto flex justify-between items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#" class="text-2xl font-semibold tracking-tight text-white mix-blend-difference z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Doyok&lt;span class="font-light opacity-80"&gt;Surf.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/a&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Desktop Menu --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hidden md:flex space-x-8 items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#about" class="text-sm font-medium text-white/90 hover:text-white transition mix-blend-exclusion"&gt;About&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#experience" class="text-sm font-medium text-white/90 hover:text-white transition mix-blend-exclusion"&gt;Experience&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#rates" class="text-sm font-medium text-white/90 hover:text-white transition mix-blend-exclusion"&gt;Rates&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20Doyok!%20I%20would%20like%20to%20book%20a%20lesson." target="_blank" class="glass px-5 py-2 rounded-full text-sm font-semibold text-slate-900 hover:bg-white transition shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Book Now</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Mobile Menu Button --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="mobile-menu-btn" class="md:hidden z-50 text-white mix-blend-difference focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;i class="ph ph-list text-3xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Mobile Menu Overlay --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="mobile-menu" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center space-y-8 opacity-0 pointer-events-none transition-opacity duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#about" class="mobile-link text-2xl font-light text-white"&gt;About&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#experience" class="mobile-link text-2xl font-light text-white"&gt;Experience&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#rates" class="mobile-link text-2xl font-light text-white"&gt;Rates&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20Doyok!%20I%20would%20like%20to%20book%20a%20lesson." target="_blank" class="text-xl font-semibold text-ocean-500"&gt;Book via WhatsApp&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="close-menu" class="absolute top-6 right-6 text-white/50 hover:text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;i class="ph ph-x text-3xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Hero Section (Ocean Theme) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="relative h-screen w-full overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Video/Image Background --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="absolute inset-0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&amp;w=2070&amp;auto=format&amp;fit=crop"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>alt="Surfing in Indonesia"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>class="w-full h-full object-cover brightness-[0.85]"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Gradient Overlay --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-white/90 font-medium tracking-widest text-sm mb-4 uppercase animate-fade-in-up" style="animation-delay: 0.1s;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Selong Belanak, Indonesia</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter mb-6 animate-fade-in-up" style="animation-delay: 0.3s;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Ride the &lt;br /&gt; Perfect Wave.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-lg md:text-xl text-white/80 font-light max-w-xl mb-10 animate-fade-in-up" style="animation-delay: 0.5s;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Learn to surf with Doyok. Beginner friendly, advanced coaching, and the pure beauty of the ocean.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col md:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.7s;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#rates" class="px-8 py-3 bg-white text-slate-900 rounded-full font-medium hover:bg-gray-100 transition duration-300 shadow-xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>View Rates</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20Doyok!%20I%20have%20a%20question%20about%20surfing." class="px-8 py-3 glass-dark text-white rounded-full font-medium hover:bg-slate-800/50 transition duration-300 flex items-center justify-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="ph-fill ph-whatsapp text-green-400 text-xl"&gt;&lt;/i&gt; WhatsApp Doyok</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Scroll Indicator --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float opacity-70"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;i class="ph ph-arrow-down text-white text-2xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- About Section (Forest Theme) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="about" class="py-24 px-6 bg-forest text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-6xl mx-auto bg-white/70 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>src="https://images.unsplash.com/photo-1530870110042-980e49f04c6e?q=80&amp;w=2070&amp;auto=format&amp;fit=crop"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>alt="Doyok Surf Instructor"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>class="w-full h-full object-cover hover:scale-105 transition duration-700"</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="absolute bottom-6 left-6 right-6 glass p-4 rounded-2xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm font-semibold text-slate-900"&gt;Doyok&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-xs text-slate-600"&gt;Head Instructor &amp; Guide&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="reveal text-slate-900"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>More than just &lt;br&gt; a lesson.</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg mb-6 leading-relaxed"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>With over a decade of experience in the waters of Selong Belanak, Doyok isn't just an instructor; he's your connection to the ocean.<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg mb-8 leading-relaxed"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Whether you are standing up for the first time or perfecting your cutback, Doyok creates a safe, fun, and incredibly educational environment. Fluent in English and rich in local knowledge, every session is a blend of technical skill and island vibes.</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-3xl font-bold text-ocean-800"&gt;10+&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-slate-700 uppercase tracking-wider"&gt;Years Experience&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-3xl font-bold text-ocean-800"&gt;100%&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-slate-700 uppercase tracking-wider"&gt;Stoke Level&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Experience/Gallery Slider (Forest Theme) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="experience" class="py-20 bg-forest"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-6xl mx-auto px-6 mb-12 text-center reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl font-bold text-white drop-shadow-lg"&gt;The Experience&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-white/80 mt-2"&gt;Selong Belanak: The world's best classroom.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="flex gap-6 overflow-x-auto pb-12 px-6 no-scrollbar snap-x"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Card 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="min-w-[300px] md:min-w-[400px] snap-center reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="relative h-[500px] rounded-3xl overflow-hidden group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="https://images.unsplash.com/photo-1415604934674-561df9abf539?q=80&amp;w=2080&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Beginner surfing"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-8 left-8 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-2xl font-semibold"&gt;Beginner Friendly&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-white/80 mt-2"&gt;Soft sand bottom, perfect white water.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Card 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="min-w-[300px] md:min-w-[400px] snap-center reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="relative h-[500px] rounded-3xl overflow-hidden group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&amp;w=1262&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Crystal clear water"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-8 left-8 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-2xl font-semibold"&gt;Crystal Clear&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-white/80 mt-2"&gt;Experience the beauty of Lombok.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;!-- Card 3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div class="min-w-[300px] md:min-w-[400px] snap-center reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="relative h-[500px] rounded-3xl overflow-hidden group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?q=80&amp;w=1974&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Advanced coaching"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-8 left-8 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-2xl font-semibold"&gt;Technical Coaching&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-white/80 mt-2"&gt;Analyze and improve your style.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Rates Section (Sunset Theme) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="rates" class="pt-24 pb-12 px-6 bg-sunset text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-5xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="text-center mb-16 reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-4xl font-bold tracking-tight drop-shadow-lg"&gt;Simple Pricing.&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-lg text-white/80 mt-4"&gt;Professional instruction. Unforgettable memories.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Tier 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="glass rounded-[2rem] p-8 shadow-sm border border-white/20 hover:shadow-xl transition duration-300 reveal flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="bg-ocean-100 text-ocean-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"&gt;Most Popular&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-2xl font-semibold text-slate-900"&gt;Private Lesson&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-4xl font-bold text-slate-900"&gt;300K&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-slate-600"&gt;IDR / session&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-4 mb-8 flex-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; 2 Hours Water Time</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; 1-on-1 Focus</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Board Rental Included</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Rash Guard Included</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20I%20am%20looking%20to%20book%20a%20private%20lesson-" class="w-full block text-center bg-slate-900 text-white py-3 rounded-xl font-medium hover:bg-slate-800 transition"&gt;Book Private&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Tier 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="glass rounded-[2rem] p-8 shadow-sm border border-white/20 hover:shadow-xl transition duration-300 reveal flex flex-col" style="transition-delay: 0.1s;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mb-4 h-6"&gt;&lt;/div&gt; &lt;!-- Spacer --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-2xl font-semibold text-slate-900"&gt;Couple / Duo&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-4xl font-bold text-slate-900"&gt;500K&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-slate-600"&gt;IDR / session&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-slate-500 -mt-4 mb-6 italic"&gt;Price covers 2 people&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-4 mb-8 flex-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; 2 Hours Water Time</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Perfect for Couples</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; 2 Boards Included</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Shared Instructor</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20I%20am%20looking%20to%20book%20a%20couple%20lesson-" class="w-full block text-center bg-slate-100 text-slate-900 py-3 rounded-xl font-medium hover:bg-slate-200 transition"&gt;Book Duo&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Tier 3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="glass rounded-[2rem] p-8 shadow-sm border border-white/20 hover:shadow-xl transition duration-300 reveal flex flex-col" style="transition-delay: 0.2s;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;div class="mb-4 h-6"&gt;&lt;/div&gt; &lt;!-- Spacer --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-2xl font-semibold text-slate-900"&gt;Advanced Guide&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-4xl font-bold text-slate-900"&gt;Custom&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-slate-600"&gt;Rates&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-4 mb-8 flex-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Trip to Outside Breaks</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Wave Selection Coaching</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Local Spot Knowledge</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="flex items-center text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph-fill ph-check-circle text-ocean-500 mr-3 text-xl"&gt;&lt;/i&gt; Video Analysis Option</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20I%20am%20interested%20in%20advanced%20guiding-" class="w-full block text-center bg-slate-100 text-slate-900 py-3 rounded-xl font-medium hover:bg-slate-200 transition"&gt;Contact Me&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- NEW AI PLANNER SECTION (Sunset Theme cont.) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="planner" class="py-20 px-6 bg-sunset text-white relative z-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-4xl mx-auto glass rounded-[2.5rem] p-8 md:p-14 text-center shadow-2xl border border-white/20 reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-center mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="bg-white/20 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-md border border-white/30"&gt;Powered by AI ✨&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6"&gt;Plan Your Perfect Trip&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-slate-700 text-lg mb-10 max-w-2xl mx-auto"&gt;Not sure how many lessons to book? Let our AI helper create a custom itinerary for your stay in Selong Belanak.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Planner Form --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-10 max-w-2xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="surf-level" class="block text-left text-sm font-semibold text-slate-700 mb-2 ml-2"&gt;Your Level&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;select id="surf-level" class="w-full appearance-none bg-white/80 border border-white/40 text-slate-900 py-4 px-6 pr-8 rounded-2xl focus:outline-none focus:ring-2 focus:ring-ocean-500 cursor-pointer font-medium"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="Complete Beginner"&gt;Complete Beginner&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="Intermediate (Can catch green waves)"&gt;Intermediate&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="Advanced (Looking for barrels)"&gt;Advanced&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph ph-caret-down text-xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="trip-days" class="block text-left text-sm font-semibold text-slate-700 mb-2 ml-2"&gt;Days in Lombok&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;select id="trip-days" class="w-full appearance-none bg-white/80 border border-white/40 text-slate-900 py-4 px-6 pr-8 rounded-2xl focus:outline-none focus:ring-2 focus:ring-ocean-500 cursor-pointer font-medium"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="3"&gt;3 Days&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="5"&gt;5 Days&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="7"&gt;7 Days&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="10"&gt;10 Days&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="ph ph-caret-down text-xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="generatePlan()" id="generate-btn" class="w-full md:w-auto px-10 py-4 bg-slate-900 text-white rounded-2xl font-semibold text-lg hover:bg-slate-800 transition shadow-xl flex items-center justify-center gap-2 mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Generate Surf Plan ✨&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="btn-loader" class="loader hidden"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Result Container --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="plan-result-container" class="hidden mt-12 text-left bg-white/60 backdrop-blur-lg rounded-2xl p-8 border border-white/40 shadow-inner"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-200 pb-4 flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="ph-fill ph-calendar-check text-ocean-500"&gt;&lt;/i&gt; Your Itinerary</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="plan-content" class="ai-response text-slate-700 leading-relaxed"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Content injected by JS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mt-8 pt-6 border-t border-slate-200 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20Doyok!%20I%20just%20generated%20a%20plan%20and%20I%20want%20to%20book%20it!" target="_blank" class="inline-flex items-center gap-2 text-ocean-700 hover:text-ocean-900 font-semibold transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Send this plan to Doyok &lt;i class="ph-bold ph-arrow-right"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- CTA / Footer (Sunset Theme) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="bg-sunset text-white pt-12 pb-12 px-6 rounded-t-[3rem] relative z-0 mt-[-3rem]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="absolute inset-0 bg-black/40 rounded-t-[3rem]"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-4xl mx-auto text-center relative z-20 pt-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;i class="ph ph-waves text-6xl text-ocean-500 mb-6 inline-block animate-pulse"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-5xl md:text-6xl font-bold tracking-tight mb-8 drop-shadow-lg"&gt;Ready to paddle out?&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-slate-200 text-xl mb-12 max-w-2xl mx-auto"&gt;No deposit required. Just message Doyok to check the tide and book your slot.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587&amp;text=Hey%20Doyok!%20I%20want%20to%20check%20the%20tide%20and%20book%20a%20slot." class="group relative px-8 py-4 bg-green-500 text-white rounded-full font-semibold text-lg shadow-lg shadow-green-500/30 overflow-hidden transition-transform hover:scale-105"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i class="ph-fill ph-whatsapp text-2xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;Chat on WhatsApp&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://instagram.com/doyok_yo" target="_blank" class="px-8 py-4 glass-dark border border-slate-700 rounded-full font-semibold text-lg hover:bg-slate-800 transition flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="ph-fill ph-instagram text-2xl text-pink-500"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Follow on Instagram&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="border-t border-slate-700 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;&amp;copy; 2024 Doyok Surf School. Selong Belanak, Lombok.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="#" class="hover:text-white transition"&gt;Location&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="#" class="hover:text-white transition"&gt;Safety&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="https://api.whatsapp.com/send?phone=6287767087587" class="hover:text-white transition"&gt;Contact&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Gemini API Logic</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const apiKey = ""; // Provided by environment</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function generatePlan() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const level = document.getElementById('surf-level').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const days = document.getElementById('trip-days').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const btn = document.getElementById('generate-btn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const loader = document.getElementById('btn-loader');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const resultContainer = document.getElementById('plan-result-container');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const contentArea = document.getElementById('plan-content');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// UI Loading State</p>
+<p class="p1"><span class="Apple-converted-space">            </span>btn.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>btn.classList.add('opacity-75', 'cursor-not-allowed');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loader.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resultContainer.classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const systemPrompt = `You are Doyok, a friendly and fun local surf instructor in Selong Belanak, Lombok.<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Create a ${days}-day surf itinerary for a ${level} surfer.<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Focus on:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>1. Surfing lessons with Doyok (recommend specific times of day generally, e.g., morning for calm winds).</p>
+<p class="p1"><span class="Apple-converted-space">            </span>2. Relaxing on the beautiful white sand beach.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>3. Enjoying local coconuts and food (Nasi Goreng).</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Format the response in Markdown. Use bullet points for daily activities. Keep the tone super stoked, encouraging, and welcoming. Use emojis like 🌊, 🏄‍♂️, 🌴.<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Keep it brief but exciting. Do not mention specific prices, just the activities.`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'Content-Type': 'application/json',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify({</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>contents: [{</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>parts: [{</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>text: systemPrompt</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = await response.json();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (data.candidates &amp;&amp; data.candidates[0].content) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const markdownText = data.candidates[0].content.parts[0].text;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Convert Markdown to HTML using marked.js</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>contentArea.innerHTML = marked.parse(markdownText);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resultContainer.classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Scroll to result</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>throw new Error("No content received");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Error generating plan:', error);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('Oops! The waves are a bit choppy (API Error). Please try again later!');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} finally {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Reset UI</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.remove('opacity-75', 'cursor-not-allowed');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loader.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Navbar Glass Effect on Scroll</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const navbar = document.getElementById('navbar');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.addEventListener('scroll', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (window.scrollY &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>navbar.classList.add('glass', 'shadow-sm');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>navbar.classList.remove('py-4');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>navbar.classList.add('py-2');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Change text color for contrast on glass background</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const logo = navbar.querySelector('a');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>logo.classList.remove('text-white', 'mix-blend-difference');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>logo.classList.add('text-slate-900');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const links = navbar.querySelectorAll('.hidden a');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>links.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>link.classList.remove('text-white/90', 'mix-blend-exclusion');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>link.classList.add('text-slate-600');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const btn = document.getElementById('mobile-menu-btn');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.remove('text-white', 'mix-blend-difference');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.add('text-slate-900');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>navbar.classList.remove('glass', 'shadow-sm', 'py-2');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>navbar.classList.add('py-4');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const logo = navbar.querySelector('a');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>logo.classList.add('text-white', 'mix-blend-difference');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>logo.classList.remove('text-slate-900');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const links = navbar.querySelectorAll('.hidden a');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>links.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>link.classList.add('text-white/90', 'mix-blend-exclusion');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>link.classList.remove('text-slate-600');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const btn = document.getElementById('mobile-menu-btn');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.add('text-white', 'mix-blend-difference');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.remove('text-slate-900');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Scroll Reveal Observer</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const observerOptions = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>root: null,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>rootMargin: '0px',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>threshold: 0.1</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const observer = new IntersectionObserver((entries, observer) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>entries.forEach(entry =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (entry.isIntersecting) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>entry.target.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>observer.unobserve(entry.target); // Only animate once</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, observerOptions);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.querySelectorAll('.reveal').forEach((el) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>observer.observe(el);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Mobile Menu Logic</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mobileMenuBtn = document.getElementById('mobile-menu-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mobileMenu = document.getElementById('mobile-menu');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const closeMenuBtn = document.getElementById('close-menu');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mobileLinks = document.querySelectorAll('.mobile-link');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function toggleMenu() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isOpen = mobileMenu.classList.contains('opacity-0');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (isOpen) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>mobileMenu.classList.remove('opacity-0', 'pointer-events-none');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.body.style.overflow = 'hidden';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>mobileMenu.classList.add('opacity-0', 'pointer-events-none');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.body.style.overflow = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>mobileMenuBtn.addEventListener('click', toggleMenu);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>closeMenuBtn.addEventListener('click', toggleMenu);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>mobileLinks.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.addEventListener('click', toggleMenu);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
